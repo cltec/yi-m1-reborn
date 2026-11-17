@@ -1,0 +1,47 @@
+{
+  "analyzed_on": "2026-11-16",
+  "input_apk": {
+    "local_path": "research-artifacts/yi-mirrorless-3.1.6_20190517-apkpure.apk",
+    "sha256": "2b73f7805dfcb3bde0efbe3f8286958ba849ab614317e9c0814985ea8f927001",
+    "bytes": 23076298
+  },
+  "tool": {
+    "name": "jadx",
+    "version": "1.5.6",
+    "release_url": "https://github.com/skylot/jadx/releases/tag/v1.5.6",
+    "download_url": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
+    "zip_sha256": "545ea2be9c242511bc145755cf4bda2485ade42966e096f8b4d3da2a230e8974",
+    "upstream_digest": "sha256:545ea2be9c242511bc145755cf4bda2485ade42966e096f8b4d3da2a230e8974"
+  },
+  "command": "java -Xmx2g -cp '/home/clt/Projects/yi-camera-app/research-artifacts/tools/jadx-1.5.6/lib/*' jadx.cli.JadxCLI --no-res --threads-count 4 --output-dir '/home/clt/Projects/yi-camera-app/research-artifacts/jadx-original-app' '/home/clt/Projects/yi-camera-app/research-artifacts/yi-mirrorless-3.1.6_20190517-apkpure.apk'",
+  "exit_code": 0,
+  "duration_seconds": 68.1057880599983,
+  "generated_java_files": 4111,
+  "inspected_files": [
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/common/d.java",
+      "sha256": "924349979cbf6c24a9de41d648059ffa53de3f8eb7bd73e485cace9d26a80f37"
+    },
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/common/e.java",
+      "sha256": "2e173d1986eef12331c4de22acd02636916f2d1041f99fea23966eabce0c5e38"
+    },
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/http/camera/b.java",
+      "sha256": "a053c1922cd0e966a79d5b730d40ebe49d71b1b307e975b14db20c07d0c740cc"
+    },
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/http/camera/c.java",
+      "sha256": "b5c3de3a7083cfcf5389e56f40d2486de7bb67f1ab90560dac7c89bb562ba514"
+    },
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/b/p.java",
+      "sha256": "fb921aa80ba299dac70200d069a5d41ec677a0cacae3a0f384d563c175b05e54"
+    },
+    {
+      "generated_path": "com/xiaoyi/mirrorlesscamera/view/LiveView.java",
+      "sha256": "eb364cc7a81f9200dbc40f460397298f60a2a01741899d8ad5c88095918b36de"
+    }
+  ],
+  "scope": "Static decompilation only; no app execution, native-code disassembly, firmware analysis, network capture or camera test."
+}

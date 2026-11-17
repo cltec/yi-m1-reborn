@@ -1,0 +1,112 @@
+name: Feature slice
+description: Specify one end-to-end-testable feature slice for discussion and approval.
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Discuss one question at a time before agreeing this specification. This template does not authorize issue creation, pushing changes or merging, and submitting it is not approval.
+        Linux desktop is first: Pop!_OS 22.04 LTS for issue #1; Android and iOS follow later. Flutter/Dart is selected. Discover tools incrementally in the first approved feature, record verified commands and standardize after practical validation. Material choices still need explicit agreement.
+        The agent prepares the branch, runs checks, updates docs and opens the PR; the owner reviews, approves and merges.
+        See the [development workflow](https://github.com/cltec/yi-m1-reborn/blob/main/docs/development/workflow.md) and [testing guide](https://github.com/cltec/yi-m1-reborn/blob/main/docs/development/testing.md).
+  - type: textarea
+    id: story
+    attributes:
+      label: Actionable user story
+      description: Identify the user or stakeholder, capability, and observable benefit.
+      placeholder: As a ..., I want ..., so that ...
+    validations:
+      required: true
+  - type: textarea
+    id: functional_spec
+    attributes:
+      label: Functional specification and scope
+      description: Describe behavior, scope, exclusions, and agreed failure or recovery behavior. Keep this one vertical, end-to-end-testable slice.
+    validations:
+      required: true
+  - type: textarea
+    id: technical_spec
+    attributes:
+      label: Technical specification
+      description: Record affected interfaces, integration approach, constraints, risks, and toolchain decisions needed for this slice. Do not assume unagreed tools.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_scenarios
+    attributes:
+      label: BDD acceptance scenarios
+      description: Define observable user or stakeholder outcomes before production code. Use Given/When/Then; avoid internal implementation steps.
+      placeholder: |
+        Scenario: ...
+        Given ...
+        When ...
+        Then ...
+    validations:
+      required: true
+  - type: textarea
+    id: ui_expectations
+    attributes:
+      label: UI expectations
+      description: Before coding, agree affected screens, visual expectations and relevant loading, empty, success and error states. Include wireframes where useful, window sizes, and basic keyboard/accessibility checks. Write "Not applicable" if this slice does not touch UI.
+    validations:
+      required: true
+  - type: textarea
+    id: validation_plan
+    attributes:
+      label: Validation plan
+      description: Map scenarios to selected UI flows or other public behavior tests, supporting protocol/adapter tests and real-hardware checks. For UI changes, plan to launch the actual target app (Pop!_OS 22.04 for issue #1), exercise the journey, capture AND visually inspect screenshots, fix problems and recheck. Identify deterministic safe sample data at external boundaries; simulations are not hardware proof. Automate one failing scenario, then use incremental TDD; do not write all tests in bulk.
+    validations:
+      required: true
+  - type: textarea
+    id: visual_evidence_plan
+    attributes:
+      label: PR screenshot evidence plan
+      description: For every UI-touching PR, record reliable storage for embedded screenshot evidence. Issue #1 uses sanitized, inspected repository images embedded in the PR without a separate hosting service; verify reviewer visibility. Captions must identify scenario/state, expected and observed result, tested revision, environment, window size, and real or simulated camera data. Write "Not applicable" for a non-UI slice.
+    validations:
+      required: true
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation alongside code
+      description: Identify docs/ updates explaining use, validation and key decisions, plus steps to verify against the running app. Safe, current, inspected screenshots may illustrate docs; keep durable documentation images in the repository. Record verified tool commands and prerequisites as discovered.
+    validations:
+      required: true
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: Open questions and approval record
+      description: List unresolved questions and resolve them one at a time. Record explicit specification approval here or link the approving issue comment before implementation. Write "Awaiting approval" until approved.
+    validations:
+      required: true
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Ready for implementation
+      description: Update these manually after discussion; submitting this issue is not approval.
+      options:
+        - label: The user story, functional and technical specification, scope, and BDD scenarios are agreed.
+        - label: Blocking questions are resolved and explicit specification approval is recorded.
+        - label: Validation boundaries and hardware needs are agreed, with no unverified compatibility claims.
+        - label: UI expectations, window sizes, keyboard/accessibility checks and PR screenshot evidence storage are agreed, or UI is not applicable.
+        - label: Documentation steps to verify against the running app are identified, or not applicable.
+        - label: This slice will use one branch and one issue-linked PR, with docs alongside code.
+  - type: dropdown
+    id: hardware_status
+    attributes:
+      label: Hardware verification status
+      description: Assess camera-communication impact, including indirect changes from UI/application code. Cosmetic or other changes with no communication impact may merge after applicable checks without new camera validation; explain why. Protocol or camera-communication changes require successful actual target-desktop + YI M1 firmware 3.2-int validation (Pop!_OS 22.04 for issue #1) before merge. Pending or failed validation blocks those PRs; simulations are not hardware evidence.
+      options:
+        - Pending hardware validation
+        - Implemented, awaiting hardware validation
+        - Hardware validation failed
+        - Verified on actual target desktop + M1 3.2-int (evidence below)
+        - Not applicable (explain below)
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_evidence
+    attributes:
+      label: Acceptance results and hardware evidence
+      description: Maintain per-scenario results, checks run/not run, and limitations. For hardware evidence include code revision, date, actual OS/version, confirmed M1 firmware 3.2-int, steps, expected/observed results, and sanitized evidence. If not applicable, explain why. Use "Pending" before checks run.
+    validations:
+      required: true

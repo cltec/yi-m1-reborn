@@ -1,0 +1,129 @@
+{
+  "retrieved_on": "2026-11-16",
+  "repository": "https://github.com/xiaobaiwud12/yi-m1-controller-app",
+  "commit": "dc3a659dcee01d075ddc7bb3c4d3dede7986653e",
+  "files": [
+    {
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/README.md",
+      "http_status": 200,
+      "sha256": "3c0f8638abcc93da26614e6e5547cabb13f7df6ff6179351fccd5a57cc26c86c"
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/LICENSE",
+      "http_status": 200,
+      "sha256": "c4f1a40d8544156163de92aff12152e5478fdc7f4a9631d99820418901183e2c"
+    },
+    {
+      "path": "NOTICE",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/NOTICE",
+      "http_status": 200,
+      "sha256": "4f0ee6005847563eaee37025e9689d9556ca5e99681c157a5888210532ca9e42"
+    },
+    {
+      "path": "app/pubspec.yaml",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/pubspec.yaml",
+      "http_status": 200,
+      "sha256": "1578c195f37189fcc3b3d0a0239eb101cc0a6796467a0e5bf818cc3a96903189"
+    },
+    {
+      "path": "app/docs/PROTOCOL.md",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/docs/PROTOCOL.md",
+      "http_status": 200,
+      "sha256": "cfa1e9a2280ec4e30bd5bfd201321fd796a454fb0c4809478ff46212e23535cf"
+    },
+    {
+      "path": "app/lib/transport/album.dart",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/lib/transport/album.dart",
+      "http_status": 200,
+      "sha256": "ab0dd8a8b0d457fddbe0a1aeef47a2c38d4b3d2bb2727b58854e0938294162a4"
+    },
+    {
+      "path": "app/lib/transport/http_transport.dart",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/lib/transport/http_transport.dart",
+      "http_status": 200,
+      "sha256": "17350975af5f5f9f4add6666be0d9baab9bfe5f3929192868c6bd79a1930d547"
+    },
+    {
+      "path": "app/lib/platform/asset_sink.dart",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/lib/platform/asset_sink.dart",
+      "http_status": 200,
+      "sha256": "c382f97296272eed57c65344029195ff24e6b9d7d79d963cd07a04d34be747fc"
+    },
+    {
+      "path": "app/lib/platform/wifi_joiner.dart",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/lib/platform/wifi_joiner.dart",
+      "http_status": 200,
+      "sha256": "4449dcc5e5e011221b03e356dbd4966579b75b79a444a61b8d17254ac796f558"
+    },
+    {
+      "path": "app/lib/protocol/http_commands.dart",
+      "url": "https://raw.githubusercontent.com/xiaobaiwud12/yi-m1-controller-app/dc3a659dcee01d075ddc7bb3c4d3dede7986653e/app/lib/protocol/http_commands.dart",
+      "http_status": 200,
+      "sha256": "5a279732c3a1c70e3ec2d5703d938415f74a960a817aa22e90c04a3b276b9703"
+    }
+  ],
+  "releases": [
+    {
+      "tag": "v0.2.4",
+      "published_at": "2026-10-18T10:37:07Z",
+      "assets": [
+        {
+          "name": "yi-m1-controller-0.2.4.apk",
+          "size": 19706170,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.4/yi-m1-controller-0.2.4.apk"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.3",
+      "published_at": "2026-10-16T00:46:20Z",
+      "assets": [
+        {
+          "name": "yi-m1-controller-0.2.3.apk",
+          "size": 19706170,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.3/yi-m1-controller-0.2.3.apk"
+        },
+        {
+          "name": "yi-m1-controller-0.2.3.apk.sha256",
+          "size": 94,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.3/yi-m1-controller-0.2.3.apk.sha256"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.2",
+      "published_at": "2026-10-14T08:21:15Z",
+      "assets": [
+        {
+          "name": "yi-m1-controller-0.2.2.apk",
+          "size": 19706170,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.2/yi-m1-controller-0.2.2.apk"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.1",
+      "published_at": "2026-09-18T06:17:47Z",
+      "assets": [
+        {
+          "name": "yi-m1-controller-0.2.1.apk",
+          "size": 19706170,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.1/yi-m1-controller-0.2.1.apk"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2.0",
+      "published_at": "2026-09-16T15:20:29Z",
+      "assets": [
+        {
+          "name": "yi-m1-controller-0.2.0.apk",
+          "size": 19668622,
+          "url": "https://github.com/xiaobaiwud12/yi-m1-controller-app/releases/download/v0.2.0/yi-m1-controller-0.2.0.apk"
+        }
+      ]
+    }
+  ]
+}

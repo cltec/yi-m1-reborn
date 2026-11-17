@@ -1,0 +1,194 @@
+[
+  {
+    "url": "https://developer.chrome.com/docs/capabilities/bluetooth",
+    "final_url": "https://developer.chrome.com/docs/capabilities/bluetooth",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "Web Bluetooth",
+        "excerpt": "zed with collections Save and categorize content based on your preferences. The Web Bluetooth API allows websites to communicate with Bluetooth devices. François Beaufort GitHub What if I told you websites could communicate with nearby Bluetooth devices\nin a secure and privacy-preserving way? This way, heart rate monitors, singing\nlightbulbs, and even turtles could interact directly with a website. Until now, the ability to interact with Bluetooth devices has been possible\nonly for platform-specific apps. The Web Bluetooth API aims to change this and\nbrings it to web browse"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API",
+    "final_url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "Web Bluetooth",
+        "excerpt": "Web Bluetooth API - Web APIs | MDN Skip to main content Skip to search Web Web APIs Web Bluetooth API Web Bluetooth API Limited availability This feature is not Baseline because it does not work in some of the most widely-used browsers. See full compatibility Learn more Experimental: This is an experimental technology Check the Browser compatibility table carefully before using this in production. The Web Bluetooth API provides the ability to connect and interact with Bluetooth Low Energy periph"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.android.com/develop/connectivity/bluetooth/bt-permissions",
+    "final_url": "https://developer.android.com/develop/connectivity/bluetooth/bt-permissions",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "BLUETOOTH_SCAN",
+        "excerpt": " If your app looks for Bluetooth\ndevices , such as\nBLE peripherals, declare the BLUETOOTH_SCAN permission. If your app makes the current device discoverable to other Bluetooth\ndevices ,\ndeclare the BLUETOOTH_ADVERTISE permission. If your app communicates with already-paired Bluetooth\ndevices , declare the BLUETOOTH_CONNECT permission. For your legacy Bluetooth-related permission declarations, set android:maxSdkVersion to 30. This app compatibility step helps the system\ngrant your app only the Bluetooth permissions that it needs when installed on\ndevices that run Android 12 "
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy",
+    "final_url": "https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "local network privacy",
+        "excerpt": "TN3179: Understanding local network privacy | Apple Developer Documentation This page requires JavaScript. Please turn on JavaScript in your browser and refresh the page to view its content. Automated tools and assistive tools: A Markdown version of the page content is available: View Markdown"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager",
+    "final_url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [],
+    "error": null
+  },
+  {
+    "url": "https://docs.flutter.dev/platform-integration/web/faq",
+    "final_url": "https://docs.flutter.dev/platform-integration/web/faq",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "dart:io",
+        "excerpt": " build a responsive app for the web? # See Creating responsive apps . Can I use dart:io with a web app? # No. The file system is not accessible from the browser.\n                  For network functionality, use the http package. Note that security works somewhat\n                  differently because the browser (and not the app)\n                  controls the headers on an HTTP request. How do I handle web-specific imports? # Some plugins require platform-specific imports, particularly if they use the\n                  file system, which is not accessible from the browser. "
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://caniuse.com/web-bluetooth",
+    "final_url": "https://caniuse.com/web-bluetooth",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "Web Bluetooth",
+        "excerpt": "Web Bluetooth | Can I use... Support tables for HTML5, CSS3, etc Can I use Search ? Settings Web Bluetooth - UNOFF Global usage 78.66% + 0% = 78.66% Allows web sites to communicate over GATT with nearby user-selected Bluetooth devices in a secure and privacy-preserving way. Chrome ❌ 4 - 44 : Not supported ❌ 45 - 52 : Disabled by default ❌ 53 - 55 : Disabled by default ✅ 56 - 156 : Supported ✅ 157 : Supported ✅ 158 - 160 : Supported Edge ❌ 12 - 18 : Not supported ✅ 79 - 155 : Supported ✅ 156 : Su"
+      },
+      {
+        "term": "Safari on iOS",
+        "excerpt": " - 10 : Not supported ❌ 11 : Not supported Chrome for Android ✅ 157 : Supported Safari on iOS ❌ 3.2 - 26.6 : Not supported ❌ 27.0 : Not supported ❌ 27.1 - 27.2 : Not supported Samsung Internet ❌ 4 - 5.4 : Not supported ✅ 6.2 - 30 : Supported ✅ 31 : Supported Opera Mini ❌ all : Not supported Opera Mobile ❌ 10 - 12.1 : Not supported ✅ 80 : Supported UC Browser for Android ✅ 15.5 : Supported Android Browser ❌ 2.1 - 4.4.4 : Not supported ✅ 157 : Supported Firefox for Android ❌ 160 : Not supported QQ Browser ❌ 14.9 : Not supported Baidu Browser ✅ 13.52 : Supported KaiOS Browser "
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.chrome.com/blog/local-network-access",
+    "final_url": "https://developer.chrome.com/blog/local-network-access",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "Chrome 142",
+        "excerpt": "Update (2025-09-29): The Local Network Access permission prompt is launching in Chrome 142.\nWe've written an LNA adoption guide to answer frequently asked questions. Chrome is adding a new permission prompt for sites that make connections to a\nuser's local network as part of the Local Network Access specification .\nThe aim is to protect users from cross-site request forgery (CSRF) attacks\ntargeting routers and other devices on private networks, and to reduce the\nability of sites to use these requests to fingerprint the user's local network. To understand how this change imp"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy.md",
+    "final_url": "https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy.md",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "local network privacy",
+        "excerpt": "# TN3179: Understanding local network privacy\n\nLearn how local network privacy affects your software.\n\n## Overview\n\nLocal network privacy puts people in control of which programs can interact with devices on their network.  The first time a program accesses the local network, the system displays an alert asking the user to approve that access.  The system records their decision, so future accesses don’t prompt.\n\nTo learn more, see:\n\n- WWDC 2020 Session 10110: [Support local network privacy in your app](https://develope"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager.md",
+    "final_url": "https://developer.apple.com/documentation/networkextension/nehotspotconfigurationmanager.md",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "explicit user consent",
+        "excerpt": "reviously configured network, the device prompts the user for approval. Without explicit user consent, your app can’t make configuration changes.\n\nYour app can use [`removeConfiguration(forHS20DomainName:)`](/documentation/NetworkExtension/NEHotspotConfigurationManager/removeConfiguration(forHS20DomainName:)) or [`removeConfiguration(forSSID:)`](/documentation/NetworkExtension/NEHotspotConfigurationManager/removeConfiguration(forSSID:)) to delete a configuration that it has added, but not a configuration added by another app or user. The user can also delete configured netw"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/corebluetooth.md",
+    "final_url": "https://developer.apple.com/documentation/corebluetooth.md",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [],
+    "error": null
+  },
+  {
+    "url": "https://developer.android.com/develop/connectivity/wifi/wifi-bootstrap",
+    "final_url": "https://developer.android.com/develop/connectivity/wifi/wifi-bootstrap",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [],
+    "error": null
+  },
+  {
+    "url": "https://developer.android.com/develop/connectivity/wifi/wifi-permissions",
+    "final_url": "https://developer.android.com/develop/connectivity/wifi/wifi-permissions",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "NEARBY_WIFI_DEVICES",
+        "excerpt": "oid 13 (API level 33) or higher and manage Wi-Fi connections\nshould request the NEARBY_WIFI_DEVICES runtime permission . This\npermission makes it easier to justify an app's access of nearby Wi-Fi devices;\non previous versions of Android, these apps needed to declare the ACCESS_FINE_LOCATION permission instead. Caution: If your app tries to call a Wi-Fi API without the proper permission, a SecurityException occurs. Permission is part of the nearby devices group The NEARBY_WIFI_DEVICES permission is part of the Nearby devices permission group. This group, added in Android 12 "
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.android.com/privacy-and-security/security-config",
+    "final_url": "https://developer.android.com/privacy-and-security/security-config",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [],
+    "error": null
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS",
+    "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "Cross-Origin Resource Sharing",
+        "excerpt": "Cross-Origin Resource Sharing (CORS) - HTTP | MDN Skip to main content Skip to search Web HTTP Guides Cross-Origin Resource Sharing (CORS) Cross-Origin Resource Sharing (CORS) Baseline Widely available This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015. See full compatibility Learn more Cross-Origin Resource Sharing ( CORS ) is an HTTP -header based mechanism that allows a server to indicate any origins (domain"
+      }
+    ],
+    "error": null
+  },
+  {
+    "url": "https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowslocalnetworking.md",
+    "final_url": "https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowslocalnetworking.md",
+    "http_status": 200,
+    "retrieved_on": "2026-11-16",
+    "excerpts": [
+      {
+        "term": "NSAllowsLocalNetworking",
+        "excerpt": "# NSAllowsLocalNetworking\n\nA Boolean value that indicates whether to allow local resources to load.\n\n## Discussion\n\nThe `NSAllowsLocalNetworking` key controls whether App Transport Security (ATS) allows your app to connect to unqualified domains, `.local` domains, and IP addresses using IPv4 or IPv6.\n\nIn iOS 9 and macOS 10.11, ATS disallows connections to all three domain types. You can add exceptions for unqualified domains and `.local` domains in the [`NSExceptionDomains`](/documentation/BundleR"
+      }
+    ],
+    "error": null
+  }
+]

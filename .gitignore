@@ -1,0 +1,10 @@
+# Downloaded third-party apps, firmware, manuals and analysis outputs.
+research-artifacts/
+
+# Local secrets; sanitized examples may be committed.
+.env
+.env.*
+!.env.example
+
+# Local desktop metadata.
+.DS_Store
