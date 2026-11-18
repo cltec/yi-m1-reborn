@@ -8,3 +8,10 @@ research-artifacts/
 
 # Local desktop metadata.
 .DS_Store
+
+# Flutter/Dart generated output and local IDE state.
+.dart_tool/
+.flutter-plugins-dependencies
+build/
+.idea/
+*.iml

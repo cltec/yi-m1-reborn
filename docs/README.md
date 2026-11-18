@@ -1,6 +1,6 @@
 # Documentation
 
-This repository currently contains documentation and camera research, not an implemented application.
+The repository contains documentation, camera research, an in-progress Linux Flutter connection and offline Gallery filename-listing development through application ports. Joint tests verified BLE-session reuse after app restart. Full Wi-Fi/HTTP connection is implemented against simulated boundaries and still needs decisions and hardware validation.
 
 ## Start here
 
@@ -10,13 +10,20 @@ This repository currently contains documentation and camera research, not an imp
 
 ## How-to guides
 
+- [Develop Gallery offline](development/gallery-offline.md): simulated camera composition, shared application flow and final integration limits.
+
+- [Develop the camera connection](development/connection.md): setup, verified checks, pending decisions and jointly supervised camera tests.
+
 - [Development workflow](development/workflow.md): discuss, specify, implement and review a vertical slice.
 - [Resume prerequisite validation](development/validation-handoff.md): approved task order and proposed V1 readiness check for a fresh session.
 
 ## Reference
 
+- [Remaining Gallery work](development/remaining-work.md): linked sub-issues and draft-publication limits for #1/#2/#3.
+
 - [Testing strategy](development/testing.md): BDD/TDD boundaries and validation evidence.
 - [First desktop environment](development/environment.md): measured tools, services and permission limits for issue #1.
+- [Connection validation blockers](development/connection-blockers.md): routing, network lifetime, keyring and cleanup limits before real-network testing.
 - [Camera research](research/README.md): sourced hardware, app and protocol findings.
 
 ## Explanations and decisions

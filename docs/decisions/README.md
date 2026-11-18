@@ -7,6 +7,8 @@ Use an ADR for a significant architectural choice that future contributors need 
 | [0001](0001-ports-and-adapters.md) | Accepted | Ports and Adapters for multiple native platforms |
 | [0002](0002-flutter-dart.md) | Accepted | Flutter/Dart, with platform-independent core and platform adapters |
 | [0003](0003-linux-integration-boundaries.md) | Accepted | Narrow Linux integrations and platform-neutral pairing storage |
+| [0004](0004-camera-network-lifetime.md) | Accepted | Disconnect temporary camera Wi-Fi on app close or crash |
+| [0005](0005-keyring-unlock-prompts.md) | Accepted | Allow system keyring unlock prompt and continue on successful storage |
 
 ## Recording a decision
 
