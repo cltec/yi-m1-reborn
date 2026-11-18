@@ -14,7 +14,7 @@ The implementing agent prepares the branch, runs checks, updates docs and opens 
 
 ## Repository setup status
 
-There is no application build or test command yet. [Project context](docs/context.md) records the approved SDK and integrations; [environment](docs/development/environment.md) distinguishes inspected prerequisites from untested behavior. Follow the [standard Flutter BDD approach](docs/development/testing.md#use-standard-flutter-tooling-for-bdd) and its visual/hardware checks. Agree remaining tools as needed and record reproducible prerequisites and verified commands when established. Start the next session with the [validation handoff](docs/development/validation-handoff.md); task-order approval does not authorize probes or production implementation.
+The Linux Flutter scaffold is in progress for issue #2. Use the [connection development guide](docs/development/connection.md) for SDK setup, verified test/analyze commands and desktop validation results. [Project context](docs/context.md) records approved integrations; [environment](docs/development/environment.md) separates measured prerequisites from untested behavior. Follow the [standard Flutter BDD approach](docs/development/testing.md#use-standard-flutter-tooling-for-bdd), including visual/hardware checks. Real-camera tests will be performed together with the owner after scoped approval. The [handoff](docs/development/validation-handoff.md) preserves prior evidence; issue approval alone does not authorize hardware operations.
 
 Keep local proprietary research inputs/decompiler output in ignored `research-artifacts/`. Never commit credentials or personal media. Community code needs a license/provenance check before reuse. The project license itself is still undecided.
 

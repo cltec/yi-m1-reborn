@@ -1,6 +1,6 @@
 # ADR 0003: Keep Linux integrations narrow and behind application ports
 
-- Status: Accepted
+- Status: Accepted; app-exit lifetime amended by [ADR 0004](0004-camera-network-lifetime.md), locked-keyring policy amended by [ADR 0005](0005-keyring-unlock-prompts.md)
 - Date: 2026-11-17
 - Related issue: [#1 — Open Gallery](https://github.com/cltec/yi-m1-reborn/issues/1)
 - Supersedes: The earlier issue-level `nm` 0.6.0 selection; complements [ADR 0001](0001-ports-and-adapters.md) and [ADR 0002](0002-flutter-dart.md).
