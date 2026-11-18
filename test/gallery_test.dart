@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:yi_m1_reborn/application/camera_photos.dart';
+import 'package:yi_m1_reborn/application/load_gallery.dart';
 import '../test_support/network_fixture.dart';
 import '../test_support/pairing_fixture.dart';
 import 'package:yi_m1_reborn/application/camera_network.dart';
@@ -11,6 +13,211 @@ import 'package:yi_m1_reborn/presentation/gallery.dart';
 import 'package:yi_m1_reborn/application/discovery_approval.dart';
 
 void main() {
+  testWidgets('Disposing Gallery cancels pending listing before late results', (
+    tester,
+  ) async {
+    final connection = PairCamera(
+      pairing: PreviewPairing(),
+      store: PreviewStore()..camera = previewRemembered,
+      network: SampleNetwork(),
+      reachability: SampleReachability(),
+    );
+    final photos = ControlledPhotos();
+    await tester.pumpWidget(
+      GalleryApp(
+        discovery: SampleDiscovery(),
+        pairing: connection,
+        gallery: LoadGallery(connection: connection, photos: photos),
+      ),
+    );
+    await tester.pump();
+    await tester.pump();
+    await tester.pump();
+    expect(find.text('Loading photo filenames'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
+    photos.result.complete(const [
+      CameraPhoto(id: 'late', filename: 'LATE.JPG'),
+    ]);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('BLE-only success cannot start filename listing', (tester) async {
+    final connection = PairCamera(
+      pairing: PreviewPairing(),
+      store: PreviewStore()..camera = previewRemembered,
+    );
+    final photos = SamplePhotos();
+    await tester.pumpWidget(
+      GalleryApp(
+        discovery: SampleDiscovery(),
+        pairing: connection,
+        gallery: LoadGallery(connection: connection, photos: photos),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(photos.calls, 0);
+    expect(find.text('Connected'), findsNothing);
+    expect(find.text('Retry'), findsOneWidget);
+  });
+
+  testWidgets(
+    'Unexpected listing error is reported without empty state or Retry',
+    (tester) async {
+      final connection = PairCamera(
+        pairing: PreviewPairing(),
+        store: PreviewStore()..camera = previewRemembered,
+        network: SampleNetwork(),
+        reachability: SampleReachability(),
+      );
+      await tester.pumpWidget(
+        GalleryApp(
+          discovery: SampleDiscovery(),
+          pairing: connection,
+          gallery: LoadGallery(
+            connection: connection,
+            photos: UnexpectedPhotos(),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isA<StateError>());
+      expect(
+        find.text('Unexpected application error. See diagnostic logs.'),
+        findsOneWidget,
+      );
+      expect(find.text('No photos'), findsNothing);
+      expect(find.text('Retry'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'L5: link loss during listing discards late rows and waits cleanup before Retry',
+    (tester) async {
+      final network = SampleNetwork();
+      final connection = PairCamera(
+        pairing: PreviewPairing(),
+        store: PreviewStore()..camera = previewRemembered,
+        network: network,
+        reachability: SampleReachability(),
+      );
+      final photos = ControlledPhotos();
+      await tester.pumpWidget(
+        GalleryApp(
+          discovery: SampleDiscovery(),
+          pairing: connection,
+          gallery: LoadGallery(connection: connection, photos: photos),
+        ),
+      );
+      await tester.pump();
+      await tester.pump();
+      await tester.pump();
+      network.session.lostConnection.complete();
+      await tester.pump();
+      await tester.pump();
+      await tester.pump();
+      expect(find.text('Connected'), findsNothing);
+      expect(find.text('Retry'), findsNothing);
+      photos.result.complete(const [
+        CameraPhoto(id: 'late', filename: 'LATE.JPG'),
+      ]);
+      await tester.pump();
+      await tester.pump();
+      expect(find.text('LATE.JPG'), findsNothing);
+      network.session.disconnected.complete();
+      await tester.pumpAndSettle();
+      expect(find.text('Retry'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'L3: pending listing is not empty; successful empty listing is explicit',
+    (tester) async {
+      final connection = PairCamera(
+        pairing: PreviewPairing(),
+        store: PreviewStore()..camera = previewRemembered,
+        network: SampleNetwork(),
+        reachability: SampleReachability(),
+      );
+      final photos = ControlledPhotos();
+      await tester.pumpWidget(
+        GalleryApp(
+          discovery: SampleDiscovery(),
+          pairing: connection,
+          gallery: LoadGallery(connection: connection, photos: photos),
+        ),
+      );
+      await tester.pump();
+      await tester.pump();
+      await tester.pump();
+      expect(find.text('Loading photo filenames'), findsOneWidget);
+      expect(find.text('No photos'), findsNothing);
+      photos.result.complete([]);
+      await tester.pumpAndSettle();
+      expect(find.text('No photos'), findsOneWidget);
+      expect(find.text('Loading photo filenames'), findsNothing);
+    },
+  );
+
+  testWidgets('L4: listing Retry reuses the verified connection', (
+    tester,
+  ) async {
+    final pairing = PreviewPairing();
+    final network = SampleNetwork();
+    final connection = PairCamera(
+      pairing: pairing,
+      store: PreviewStore()..camera = previewRemembered,
+      network: network,
+      reachability: SampleReachability(),
+    );
+    final photos = RetryPhotos();
+    await tester.pumpWidget(
+      GalleryApp(
+        discovery: SampleDiscovery(),
+        pairing: connection,
+        gallery: LoadGallery(connection: connection, photos: photos),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Photo listing failed'), findsOneWidget);
+    expect(find.text('No photos'), findsNothing);
+    await tester.tap(find.text('Retry'));
+    await tester.pumpAndSettle();
+    expect(find.text('IMG_0001.JPG'), findsOneWidget);
+    expect(photos.calls, 2);
+    expect(pairing.pairs, 0);
+    expect(network.session.closed, isFalse);
+  });
+
+  testWidgets(
+    'L1: verified connection loads filenames through the shared application port',
+    (tester) async {
+      final connection = PairCamera(
+        pairing: PreviewPairing(),
+        store: PreviewStore()..camera = previewRemembered,
+        network: SampleNetwork(),
+        reachability: SampleReachability(),
+      );
+      final photos = SamplePhotos();
+      await tester.pumpWidget(
+        GalleryApp(
+          discovery: SampleDiscovery(),
+          pairing: connection,
+          gallery: LoadGallery(connection: connection, photos: photos),
+          simulated: true,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Connected'), findsOneWidget);
+      expect(find.text('Simulated camera — no camera access'), findsOneWidget);
+      expect(find.text('IMG_0001.JPG'), findsOneWidget);
+      expect(find.text('IMG_0001.DNG'), findsOneWidget);
+      expect(photos.calls, 1);
+      expect(find.text('No photos'), findsNothing);
+    },
+  );
+
   testWidgets('Unexpected Pair fault stops progress without normal Retry', (
     tester,
   ) async {
@@ -357,4 +564,50 @@ class UnexpectedPairing extends PreviewPairing {
     DiscoveredCamera camera,
     PairingAttempt attempt,
   ) async => throw StateError('unexpected pair');
+}
+
+class SamplePhotos implements CameraPhotos {
+  int calls = 0;
+  @override
+  Future<List<CameraPhoto>> listPhotos(
+    CameraNetworkSession session,
+    ListingAttempt attempt,
+  ) async {
+    calls++;
+    return const [
+      CameraPhoto(id: 'jpg', filename: 'IMG_0001.JPG'),
+      CameraPhoto(id: 'raw', filename: 'IMG_0001.DNG'),
+    ];
+  }
+}
+
+class RetryPhotos extends SamplePhotos {
+  @override
+  Future<List<CameraPhoto>> listPhotos(
+    CameraNetworkSession session,
+    ListingAttempt attempt,
+  ) async {
+    if (calls == 0) {
+      calls++;
+      throw const PhotoListingFailure('Simulated listing failure.');
+    }
+    return super.listPhotos(session, attempt);
+  }
+}
+
+class ControlledPhotos implements CameraPhotos {
+  final result = Completer<List<CameraPhoto>>();
+  @override
+  Future<List<CameraPhoto>> listPhotos(
+    CameraNetworkSession session,
+    ListingAttempt attempt,
+  ) => attempt.wait(result.future);
+}
+
+class UnexpectedPhotos implements CameraPhotos {
+  @override
+  Future<List<CameraPhoto>> listPhotos(
+    CameraNetworkSession session,
+    ListingAttempt attempt,
+  ) async => throw StateError('unexpected catalog');
 }

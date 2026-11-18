@@ -3,24 +3,47 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../application/camera_discovery.dart';
 import '../application/camera_pairing.dart';
-import '../application/pair_camera.dart';
+import '../application/camera_connection.dart';
+import '../application/camera_photos.dart';
+import '../application/load_gallery.dart';
 
 class GalleryApp extends StatelessWidget {
-  const GalleryApp({super.key, required this.discovery, this.pairing});
+  const GalleryApp({
+    super.key,
+    required this.discovery,
+    this.pairing,
+    this.gallery,
+    this.simulated = false,
+  });
   final CameraDiscovery discovery;
-  final PairCamera? pairing;
+  final CameraConnection? pairing;
+  final LoadGallery? gallery;
+  final bool simulated;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'YI M1 Reborn',
-    home: Gallery(discovery: discovery, pairing: pairing),
+    home: Gallery(
+      discovery: discovery,
+      pairing: pairing,
+      gallery: gallery,
+      simulated: simulated,
+    ),
   );
 }
 
 class Gallery extends StatefulWidget {
-  const Gallery({super.key, required this.discovery, this.pairing});
+  const Gallery({
+    super.key,
+    required this.discovery,
+    this.pairing,
+    this.gallery,
+    this.simulated = false,
+  });
   final CameraDiscovery discovery;
-  final PairCamera? pairing;
+  final CameraConnection? pairing;
+  final LoadGallery? gallery;
+  final bool simulated;
 
   @override
   State<Gallery> createState() => _GalleryState();
@@ -33,6 +56,11 @@ class _GalleryState extends State<Gallery> {
   String? _pairingError;
   bool _sessionReady = false;
   bool _unexpectedError = false;
+  List<CameraPhoto>? _photos;
+  bool _listing = false;
+  String? _listingError;
+  int _listingGeneration = 0;
+  int _connectionGeneration = 0;
 
   @override
   void initState() {
@@ -119,9 +147,48 @@ class _GalleryState extends State<Gallery> {
     }
   }
 
+  Future<void> _loadPhotos() async {
+    final gallery = widget.gallery;
+    if (gallery == null || _listing || !mounted || !_sessionReady) return;
+    final generation = ++_listingGeneration;
+    setState(() {
+      _listing = true;
+      _listingError = null;
+      _photos = null;
+    });
+    try {
+      final photos = await gallery.load();
+      if (mounted && generation == _listingGeneration && _sessionReady) {
+        setState(() => _photos = photos);
+      }
+    } on PhotoListingFailure catch (failure) {
+      if (mounted && generation == _listingGeneration && _sessionReady) {
+        setState(() => _listingError = failure.message);
+      }
+    } on ListingCancelled {
+      // Disposal/link loss already selected the state; never show empty success.
+    } catch (error, stack) {
+      if (mounted && generation == _listingGeneration) {
+        setState(() => _unexpectedError = true);
+      }
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: error,
+          stack: stack,
+          library: 'gallery listing',
+        ),
+      );
+    } finally {
+      if (mounted && generation == _listingGeneration) {
+        setState(() => _listing = false);
+      }
+    }
+  }
+
   void _ready() {
     if (!mounted) return;
-    if (widget.pairing!.includesNetwork && !widget.pairing!.connected) {
+    if ((widget.pairing!.includesNetwork && !widget.pairing!.connected) ||
+        (widget.gallery != null && widget.pairing!.verifiedSession == null)) {
       setState(() {
         _pairingStatus = null;
         _pairingError = 'Camera network connection ended. Select Retry.';
@@ -132,18 +199,47 @@ class _GalleryState extends State<Gallery> {
       _sessionReady = true;
       _pairingStatus = null;
     });
+    unawaited(_loadPhotos());
     final pairing = widget.pairing!;
+    final generation = ++_connectionGeneration;
     final ended = pairing.connectionEnded;
     pairing.connectionLost?.then((_) async {
-      if (!mounted || !_sessionReady) return;
+      if (!mounted || !_sessionReady || generation != _connectionGeneration)
+        return;
       setState(() {
         _sessionReady = false;
+        _photos = null;
+        _listingError = null;
+        _listingGeneration++;
+        _listing = false;
         _pairingStatus = 'Releasing camera network';
         _pairingError = 'Camera network connection ended. Select Retry.';
       });
-      await ended;
-      if (mounted) setState(() => _pairingStatus = null);
+      try {
+        await widget.gallery?.cancel();
+        await ended;
+        if (mounted && generation == _connectionGeneration) {
+          setState(() => _pairingStatus = null);
+        }
+      } catch (error, stack) {
+        _reportUnexpected(error, stack);
+      }
     });
+  }
+
+  void _reportUnexpected(Object error, StackTrace stack) {
+    if (mounted)
+      setState(() {
+        _pairingStatus = null;
+        _unexpectedError = true;
+      });
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stack,
+        library: 'gallery lifecycle',
+      ),
+    );
   }
 
   void _retry() {
@@ -159,14 +255,65 @@ class _GalleryState extends State<Gallery> {
 
   @override
   void dispose() {
-    final pairing = widget.pairing;
-    if (pairing != null) unawaited(pairing.cancel());
+    _listingGeneration++;
+    _connectionGeneration++;
+    unawaited(_disposeConnections());
     super.dispose();
   }
 
+  Future<void> _disposeConnections() async {
+    try {
+      await widget.gallery?.cancel();
+    } catch (error, stack) {
+      _reportUnexpected(error, stack);
+    }
+    try {
+      await widget.pairing?.cancel();
+    } catch (error, stack) {
+      _reportUnexpected(error, stack);
+    }
+  }
+
+  Widget _catalog() => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text('Connected'),
+      if (_listing) ...[
+        const Text('Loading photo filenames'),
+        const LinearProgressIndicator(),
+      ] else if (_listingError != null) ...[
+        const Text('Photo listing failed'),
+        Text(_listingError!),
+        FilledButton(onPressed: _loadPhotos, child: const Text('Retry')),
+      ] else if (_photos != null && _photos!.isEmpty)
+        const Text('No photos')
+      else if (_photos != null)
+        Expanded(
+          child: ListView.builder(
+            itemCount: _photos!.length,
+            itemBuilder: (context, index) => ListTile(
+              key: ValueKey(_photos![index].id),
+              title: Text(_photos![index].filename),
+            ),
+          ),
+        ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Gallery')),
+    appBar: AppBar(
+      title: const Text('Gallery'),
+      bottom: widget.simulated
+          ? const PreferredSize(
+              preferredSize: Size.fromHeight(28),
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: Text('Simulated camera — no camera access'),
+              ),
+            )
+          : null,
+    ),
     body: Padding(
       padding: const EdgeInsets.all(24),
       child: FutureBuilder<List<DiscoveredCamera>>(
@@ -178,6 +325,7 @@ class _GalleryState extends State<Gallery> {
             );
           }
           if (_sessionReady) {
+            if (widget.gallery != null) return _catalog();
             return widget.pairing?.includesNetwork == true
                 ? const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

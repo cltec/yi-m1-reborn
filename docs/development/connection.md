@@ -1,5 +1,7 @@
 # Develop and validate the camera connection
 
+Remaining implementation and validation are tracked in [linked follow-up issues](remaining-work.md); the owner requested a combined development branch and draft PR, not completion or merge.
+
 Use this guide for [issue #2](https://github.com/cltec/yi-m1-reborn/issues/2) on Pop!_OS 22.04 with the owner's YI M1 firmware 3.2-int. Photo filename listing is a later increment, [#3](https://github.com/cltec/yi-m1-reborn/issues/3).
 
 ## Prepare and check the workspace
@@ -16,7 +18,7 @@ flutter test integration_test/gallery_test.dart -d linux
 git diff --check
 ```
 
-The latest full suite passes **130 automated tests**, static analysis is clean, and **4 Linux integration tests** pass. Adapter tests use isolated in-process D-Bus services and local HTTP fixtures; they do not prove host NetworkManager, keyring failure policy or camera compatibility. The integration tests exercise keyboard selection, Pair, Retry and simulated connection at the application boundary. View-size overrides are layout checks, not native GTK resizing evidence.
+The #2 connection baseline passed **130 automated tests** and **4 Linux integration tests** with clean analysis. The latest combined offline Gallery snapshot passes **165 automated tests** and **5 Linux integration tests**; see the [offline guide](gallery-offline.md). Adapter tests use isolated in-process D-Bus services and local HTTP fixtures; they do not prove host NetworkManager, keyring failure policy or camera compatibility. The integration tests exercise keyboard selection, Pair, Retry and simulated connection at the application boundary. View-size overrides are layout checks, not native GTK resizing evidence.
 
 ## Launch safely without camera operations
 

@@ -1,5 +1,7 @@
 # Issue #2 visual evidence — 2026-11-17
 
+Publication note: this evidence is included in the owner-authorized combined development draft PR. Dated “local/not pushed” statements below describe capture-time status, not hardware acceptance. PR image URLs are pinned to the publication commit; capture revisions/source hashes below remain the authority for what was actually exercised.
+
 Environment: Pop!_OS 22.04, X11, Flutter 3.44.4 / Dart 3.12.2, display scale 1. Working tree on `feat/2-camera-connection`, based on `d0a92cbaa76b4df39f5cb3da5a39f618646ee97b`; not yet committed or published. SHA-256 of sorted relative file paths and bytes under `lib/`, non-ephemeral `linux/`, and `test_support/`: `ff98cb762bf8eab52ef0c48f63e9fd8f235ac79e2091902413fddd8fbdd0261f`. Revision-specific PR image URLs remain pending publication.
 
 | Image | Scenario and expected result | Observed result |

@@ -11,13 +11,21 @@ The owner confirmed the issue is validated and approved two delivery increments:
 
 Connection validation is part of #2; known-card inventory and photo-list validation belong to #3. Do not wait for photo-list research or final approval of the entire Gallery before scaffolding/developing #2. The earlier V1–V8 plan below is historical and no longer imposes that blanket implementation gate. Keep dependency-ordered checks within the relevant increment, record actual evidence and stop dependent hardware behavior on unexplained results.
 
+## Development snapshot publication — 2026-11-18
+
+The owner authorized creating remaining-work sub-issues, pushing all work on development branch `dev/gallery-offline-integration`, and opening one combined draft PR. Sub-issues #5–#9 belong to #2; #10–#12 belong to #3; final acceptance #13 belongs to #1, whose #2/#3 links are also native GitHub sub-issues. See [remaining work](remaining-work.md). This explicit snapshot publication does not authorize merge or closing unfinished issues. Camera remains unavailable.
+
+## Latest offline Gallery implementation — 2026-11-18
+
+On `feat/3-gallery-filenames` stacked on local #2 checkpoint `4b43b2c`. `CameraConnection`/verified session and `CameraPhotos` ports, `LoadGallery`, the simulated adapter and entry point, and Gallery loading/rows/empty/error/manual Retry/loss/fatal flows are implemented. 165 automated tests and five simulated Linux integration journeys pass; analysis is clean. See [offline guide](gallery-offline.md). Real `GetFileList` adapter/parse/paging/timestamps and #2 Wi-Fi diagnosis remain final integration work. No hardware tests, new dependencies, push/PR/merge during offline development.
+
 ## Offline Gallery development approval — 2026-11-18
 
 Camera unavailable. The owner approved starting #3 application/UI development now through application-owned Ports and Adapters and a simulated camera adapter, with real integration last. #1/#3 specifications updated. Existing pairing/storage/network/reachability ports already isolate external systems; add only the connection/session and filename-list capabilities actually needed by Gallery. Do not introduce a speculative all-purpose camera API or expose platform types to the core. Use the same application workflow for simulated and real adapters, selected at composition roots; visibly label the simulated app.
 
 #2 stays open with real Wi-Fi failure undiagnosed. Current baseline: 130 automated tests, four simulated Linux integration tests, clean analysis/format/whitespace. No new camera or system operation is authorized. Real listing wire format, paging/end conditions and timestamp meaning remain unverified; final hardware acceptance/communication merge gates remain. No new dependency/platform/feature scope is selected.
 
-All #2 implementation and earlier documentation edits are still uncommitted on `feat/2-camera-connection`; preserve them and establish a separate #3 branch without mixing issue changes. Offline tracer bullet: simulated verified session → application filename-list capability → Gallery rows, then incremental sorting/loading/empty/error/Retry/loss behavior with levelled diagnostics and fatal unexpected-error reporting.
+The #2 implementation and earlier documentation edits are preserved in local WIP commit `4b43b2c` on `feat/2-camera-connection`; #3 development is on stacked branch `feat/3-gallery-filenames`. Nothing pushed, merged or hardware-validated by that checkpoint. Offline tracer bullet: simulated verified session → application filename-list capability → Gallery rows, then incremental sorting/loading/empty/error/Retry/loss behavior with levelled diagnostics and fatal unexpected-error reporting.
 
 ## Observability correction — 2026-11-18
 

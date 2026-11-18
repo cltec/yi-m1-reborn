@@ -36,6 +36,14 @@ An inbound port expresses a use case, such as browsing the gallery or downloadin
 
 The composition root is the only place that selects concrete adapters and wires them to use cases and presentation. Each platform entry point has one wiring location. No service locator or platform check belongs in the domain/application core.
 
+## Offline Gallery boundary
+
+For #3, `CameraConnection` extracts only the connection workflow already used by Gallery; `PairCamera` implements it. This is an inbound application contract, not a replacement BLE/network framework. Its verified session is available only after the existing network and harmless-response checks succeed. BLE-only development success cannot start listing.
+
+`CameraPhotos` is the outbound filename-list capability. It receives that exact application-owned session and returns complete metadata or failure, without exposing HTTP, page numbers, JSON, filesystem handles or plugin types. The real adapter must own wire pagination and parsing when validated. `LoadGallery` coordinates listing lifetime, ordering and outcomes; it does not create or own the network. Listing Retry reuses the valid session; loss invalidates pending results and connection Retry waits cleanup.
+
+`main_simulated.dart` composes a synthetic connection/catalog adapter into the same Gallery and use case as the real entry point. A visible simulation label prevents fixture success being mistaken for camera evidence. It is intentionally separate from `main.dart`, whose real-operation gates remain off by default. See the [offline guide](../development/gallery-offline.md).
+
 ## Planned responsibility mapping
 
 The following mapping guides future slices. It does not mean these components or their interfaces already exist.

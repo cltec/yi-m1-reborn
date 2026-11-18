@@ -10,7 +10,7 @@ Camera unavailable. The owner approved starting #3 application/UI development no
 
 #2 stays open with real Wi-Fi failure undiagnosed. Current baseline: 130 automated tests, four simulated Linux integration tests, clean analysis/format/whitespace. No new camera or system operation is authorized. Real listing wire format, paging/end conditions and timestamp meaning remain unverified; final hardware acceptance/communication merge gates remain. No new dependency/platform/feature scope is selected.
 
-All #2 implementation and earlier documentation edits are still uncommitted on `feat/2-camera-connection`; preserve them and establish a separate #3 branch without mixing issue changes. Offline tracer bullet: simulated verified session → application filename-list capability → Gallery rows, then incremental sorting/loading/empty/error/Retry/loss behavior with levelled diagnostics and fatal unexpected-error reporting.
+The #2 implementation and earlier documentation edits are preserved in local WIP commit `4b43b2c` on `feat/2-camera-connection`; #3 development is on stacked branch `feat/3-gallery-filenames`. Nothing pushed, merged or hardware-validated by that checkpoint. Offline tracer bullet: simulated verified session → application filename-list capability → Gallery rows, then incremental sorting/loading/empty/error/Retry/loss behavior with levelled diagnostics and fatal unexpected-error reporting.
 
 ## Observability correction — 2026-11-18
 

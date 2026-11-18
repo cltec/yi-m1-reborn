@@ -1,20 +1,13 @@
 import 'dart:async';
 
 import 'camera_discovery.dart';
+import 'camera_connection.dart';
+export 'camera_connection.dart' show PairingStage;
 import 'diagnostics.dart';
 import 'camera_network.dart';
 import 'camera_pairing.dart';
 
-enum PairingStage {
-  storage,
-  cameraApproval,
-  saving,
-  session,
-  wifi,
-  verification,
-}
-
-class PairCamera {
+class PairCamera implements CameraConnection {
   PairCamera({
     required this.pairing,
     required this.store,
@@ -32,6 +25,9 @@ class PairCamera {
   CameraNetworkSession? _networkSession;
   bool get includesNetwork => network != null;
   bool get connected => _networkSession?.isActive == true;
+  @override
+  CameraNetworkSession? get verifiedSession =>
+      connected ? _networkSession : null;
   Future<void>? get connectionLost => _networkSession?.lost;
   Future<void>? get connectionEnded => _networkSession?.ended;
   PairingAttempt? _attempt;

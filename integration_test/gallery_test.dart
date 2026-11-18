@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yi_m1_reborn/adapters/simulated_camera.dart';
+import 'package:yi_m1_reborn/application/load_gallery.dart';
 import 'package:yi_m1_reborn/application/camera_network.dart';
 import 'package:yi_m1_reborn/application/camera_pairing.dart';
 import '../test_support/network_fixture.dart';
@@ -12,6 +14,39 @@ import 'package:yi_m1_reborn/presentation/gallery.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  testWidgets(
+    'L1/L4/L6: simulated catalog Retry works by keyboard at both sizes',
+    (tester) async {
+      for (final size in [const Size(1000, 700), const Size(640, 480)]) {
+        tester.view.physicalSize = size;
+        tester.view.devicePixelRatio = 1;
+        final camera = SimulatedCamera(catalog: SimulatedCatalog.error);
+        await tester.pumpWidget(
+          GalleryApp(
+            key: UniqueKey(),
+            discovery: camera,
+            pairing: camera,
+            gallery: LoadGallery(connection: camera, photos: camera),
+            simulated: true,
+          ),
+        );
+        await tester.pumpAndSettle();
+        expect(find.text('Photo listing failed'), findsOneWidget);
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+        expect(find.text('DEMO0001.JPG'), findsNWidgets(2));
+        expect(find.text('DEMO0001.DNG'), findsOneWidget);
+        expect(
+          find.text('Simulated camera — no camera access'),
+          findsOneWidget,
+        );
+        expect(tester.takeException(), isNull);
+      }
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    },
+  );
 
   testWidgets(
     'C2/C3/C6: simulated remembered connection waits for camera response and retries failure by keyboard',
