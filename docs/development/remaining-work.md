@@ -28,6 +28,8 @@ The actual Wi-Fi cause needs a joint diagnostic run. Keyring validation and cred
 
 ## Publication and review
 
+[Draft PR #14](https://github.com/cltec/yi-m1-reborn/pull/14) contains the combined development snapshot. Its embedded evidence is pinned to commit `d5b37deafba55a11eaac235296eb43497dabf33a`; capture-time source provenance remains in the evidence READMEs.
+
 The combined publication branch is `dev/gallery-offline-integration`, based on the local #2 baseline `4b43b2c` and offline #3 work together at the owner's explicit request. The earlier feature branches remain local reference points. A draft snapshot does not waive the normal one-slice review/PR workflow or hardware merge gate. It is not ready to merge; keep #1/#2/#3 and follow-ups open until their acceptance is met. No closing keywords are used to auto-close incomplete issues.
 
 Current checks: 165 automated tests and five simulated Linux integration journeys pass; analysis, format and whitespace checks pass. Populated/error native Gallery screenshots were inspected at both sizes. Loading/empty native evidence is pending #12. Real BLE restart reuse passed earlier, but real Wi-Fi/status failed and its cause is unknown. Synthetic catalogs do not prove GetFileList, paging or timestamp semantics.
